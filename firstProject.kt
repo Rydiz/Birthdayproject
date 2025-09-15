@@ -5,24 +5,47 @@ import kotlin.math.abs
 
 
 fun main() {
+// Valid months are listed here
+    val validMonths = setOf(
+        "January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
+        "November", "December"
+    )
+// Function that validates an input against the valid months list
+    fun validateMonthInput(name: String): Boolean {
+        return name in validMonths
+
+    }
 
     // User enters their first name
     println("Please enter your first name")
     val firstName = readln().lowercase().capitalize()
     println("\nWelcome $firstName!")
 
+
     // User enters their last name
     println("\nWhat is your last name?")
     val lastName = readln().lowercase().capitalize()
     println("\nWelcome $firstName $lastName!")
 
-    // User enters their birth month
-    println("\nWhich month were you born in?")
-    val birthdayMonth = readln().lowercase().capitalize()
+
+    // User enters their birth month, which is validated against valid months
+    var birthdayMonth: String = ""
+        do {
+            println("\nWhich month were you born in?")
+            birthdayMonth = readln().lowercase().capitalize()
+            if (validateMonthInput(birthdayMonth) != true) {
+                println("\nThat is not a month!")
+            }
+        } while (validateMonthInput(birthdayMonth) != true)
+
+
+
+
+
 
 
     // The month is evaluated and assigned a number between 1-12
-    val birthdayNum = when (birthdayMonth) {
+    var birthdayNum = when (birthdayMonth) {
         "January" -> 1
         "February" -> 2
         "March" -> 3
@@ -37,6 +60,10 @@ fun main() {
         "December" -> 12
         else -> 0
     }
+
+
+
+
     
 
     // The season is assigned depending on the month number
